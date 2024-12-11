@@ -44,28 +44,6 @@ vim user_program.c
 gcc -o user_program user_program.c 	
 ./user_program
 ```
-* **pthread_create**
-  >```c
-  >int pthread_create(pthread_t *thread, const pthread_attr_t *attr, 
-  >                   void *(*start_routine)(void *), void *arg);
-  >```
-  >* `pthread_t *thread`: 傳遞指向執行緒 ID 的指標，執行緒創建成功後會將其 ID 存入這個指標變數
-  >* `pthread_attr_t *attr`: 用來設定執行緒屬性，`NULL` 表示使用預設屬性
-  >* `void *(*start_routine)(void *)`: 執行緒的入口函數，當執行緒啟動時，會執行這個函數。該函數必須接受 `void *` 參數並返回 `void *`
-  >* `void *arg`: 傳遞給入口函數的參數。這裡傳入的是 `&thread_args[i]`
-  >
-  >**實際執行**:
-  >* 每次迴圈創建一個執行緒，並執行 `enter_wait_queue` 函數
-  >* 傳入的參數是 `thread_args[i]` 的地址（`(void *)&thread_args[i]`），代表每個執行緒的唯一序號
-  >
-  >**檢查返回值**:
-  >如果 `pthread_create` 返回非零值，表示創建執行緒失敗，透過 perror 輸出錯誤訊息，並強制退出程式
-* **pthread_join**
-  >```c
-  >int pthread_join(pthread_t thread, void **retval);
-  >```
-  >* `pthread_t thread`: 要等待的執行緒的 ID
-  >* `void **retval`: 一個指向指標的指標，用於接收執行緒的返回值。如果不需要返回值，可以傳入 `NULL`
 
 ## Output
 ### Q1
