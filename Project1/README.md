@@ -47,22 +47,24 @@ gcc -o user_program user_program.c
 
 ## Output
 ### Q1
-```c
+```clike
 ===========================Before Fork===============================
 [Parent] pid=23396, global variable global_a: 123
-[Parent] Offest of logical address:[0x4c70f0], Physical address:[0x73dd90f0]
+[Parent] Logical address:[0x4c70f0], Physical address:[0x73dd90f0]
 ===========================After Fork===============================
 [Child] pid=23397, global variable global_a:123
-[Child] Logical address::[0x4c70f0], Physical address:[0x73dd90f0]
+[Child] Logical address:[0x4c70f0], Physical address:[0x73dd90f0]
 ===========================trigger CoW===============================
 [Child] pid=23397, global variable global_a:789
-[Child] Logical address::[0x4c70f0], Physical address:[0x6e9860f0]
+[Child] Logical address:[0x4c70f0], Physical address:[0x6e9860f0]
 ____________________________________________________________________________
 [Parent] pid=23396, global variable global_a:123
-[Parent] Logical address::[0x4c70f0], Physical address:[0x73dd90f0]
+[Parent] Logical address:[0x4c70f0], Physical address:[0x73dd90f0]
 ```
+當執行 fork() 時，系統會從此處「分裂」出一個 child。child 會從 fork() 調用的位置開始，有一個新的 pid，並且與 parent 共用相同的記憶體空間，直到程式將 `global_a` 的值改為 `789`，觸發機制，此時 child 會獲得該變數的獨立頁面並得到新的實體位址
+
 ### Q2
-```c
+```clike
 global element a[0]:
 Offest of logical address:[0xbe48e2fa0018]   Physical address:[0x127b95018]
 ========================================================================
