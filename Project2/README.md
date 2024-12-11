@@ -1,4 +1,10 @@
 # Project2
+## Description
+Implement a system call for the **Wait Queue** functionality, allowing user applications to operate this feature via system calls.  
+> A Wait Queue is a synchronization mechanism used to put a process to sleep while waiting for a condition, avoiding resource waste.
+
+**Objective:**  Enable Threads to enter and leave the Wait Queue while adhering to the FIFO (First In, First Out) rule.
+
 ## System Call ( Custom wait queue-like functionality )
 path: `/usr/src/linux-5.15.137` 
 1. 在 `kernel/` 路徑下新增 `project2.c`
