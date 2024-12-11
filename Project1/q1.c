@@ -8,7 +8,6 @@ void* my_get_physical_addresses(void* address) {
 	return (void*)syscall(449, (void*)address);
 };
 
-
 int global_a = 123;
 
 int main() {
