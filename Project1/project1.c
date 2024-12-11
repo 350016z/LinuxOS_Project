@@ -43,7 +43,6 @@ SYSCALL_DEFINE1 (my_get_physical_addresses, void *, addr_p){
 		return 0;
 	}
 
-	/* PAGE_MASK屏蔽掉offset區域的值*/
 	/* PFN: Page Frame Number
 	 * Extracts the PFN from a (pte|pmd|pud|pgd)val_t of a 4KB page */
 	page_addr=pte_val(*pte) & PAGE_MASK & PTE_PFN_MASK;
